@@ -4,7 +4,6 @@
   import TileLayer from './lib/map/TileLayer.svelte';
   import GeoJson from './lib/map/GeoJson.svelte';
   import Tooltip from './lib/map/Tooltip.svelte';
-  import Popup from './lib/map/Popup.svelte';
   import { onMount } from "svelte";
   
   import Chart from './lib/Chart.svelte'
@@ -14,14 +13,6 @@
   let map: Leaflet
   const initialBounds = L.latLngBounds([40.99194,-73.72618],[42.0494,-71.78796]);
   let loaded = false;
-
-	function resizeMap() {
-	  if(map) { map.invalidateSize(); }
-  }
-	
-	function resetMapView() {
-		map.setView(initialView, 5);
-	}
 
   function stnClick(e: CustomEvent<any>,stn: any) {
     if (e.detail.originalEvent.shiftKey) {
