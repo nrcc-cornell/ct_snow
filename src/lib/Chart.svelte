@@ -3,8 +3,7 @@ import * as Plot from "@observablehq/plot";
 import { utcDay } from "d3-time";
 
 
-export let snowStns = [];
-let station = undefined;
+export let station;
 let snow = undefined;
 let points = [];
 
@@ -28,8 +27,8 @@ const update = async (stn) => {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ uid: stn.meta.uid, 
-														sdate: [2021,11,1], edate: [2022,4,1], 
-														elems: ["snow"] })
+							sdate: [2021,11,1], edate: [2022,4,1], 
+							elems: ["snow"] })
       })
 			.then((response) => response.json())
 			.catch(error => {
@@ -58,13 +57,6 @@ function myplot(node: HTMLDivElement) {
 
 </script>
 
-<form>
-	<label for="stns">Select Station</label><select id="stns" bind:value={station}>
-	{#each snowStns.slice(0,20) as stn }
-		<option value={stn}>{stn.meta.name}</option>
-	{/each}
-  </select>
-</form>
 <h1>{station?.meta.name}</h1>
 {#key points}
 <div use:myplot ></div>
